@@ -14,7 +14,7 @@ public class BankOpenAndAeroVolgaTest {
 
     @ValueSource(strings = {"кредиты", "ипотека", "вклады", "депозиты"})
     @ParameterizedTest(name = "Результаты поиска не пустые для запроса {0}")
-    void checkHeader2(String testData) {
+    void checkHeaderForSiteBankOpen(String testData) {
         open("https://www.open.ru/");
         $(".search-block-wrapper").click();
         $("[type='search']").setValue(testData).pressEnter();
@@ -26,7 +26,7 @@ public class BankOpenAndAeroVolgaTest {
         "ипотека,  Ипотека",
     })
     @ParameterizedTest(name = "Результаты поиска содержат текст \"{1}\" для запроса: \"{0}\"")
-    void commonComplexSearchTest(String testData, String expectedResult) {
+    void commonComplexSearchForSiteBankOpenTest(String testData, String expectedResult) {
         open("https://www.open.ru/");
         $(".search-block-wrapper").click();
         $("[type='search']").setValue(testData).pressEnter();
@@ -34,7 +34,7 @@ public class BankOpenAndAeroVolgaTest {
     }
 
 
-    static Stream<Arguments> dataProviderForSelenideSiteMenuTest() {
+    static Stream<Arguments> dataProviderForAeroVolgaSiteMenuTest() {
         return Stream.of(
             Arguments.of(Lang.EN, List.of("NPO AEROVOLGA", "AIRCRAFT","GALLERY",
                 "FOR AIRCRAFT OWNERS","PROJECT","CONTACTS")),
@@ -42,7 +42,7 @@ public class BankOpenAndAeroVolgaTest {
                 "ВЛАДЕЛЬЦАМ","ПРОЕКТЫ","КОНТАКТЫ"))
         );
     }
-    @MethodSource("dataProviderForSelenideSiteMenuTest")
+    @MethodSource("dataProviderForAeroVolgaSiteMenuTest")
     @ParameterizedTest(name = "Для локали {0} отображаются кнопки {1}")
     void aeroVolgaSiteMenuTest(Lang lang, List<String> expectedButtons) {
         open("http://www.aerovolga.com/ru/");
